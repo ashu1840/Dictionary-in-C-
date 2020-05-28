@@ -4,32 +4,32 @@
 using namespace std;
 class dictionary
 {
-private:
-char meaning[300];
-char pron[100];
-public:
-    char word[100];
-void accept()
-{
-cout<<endl<<"enter word";
-cin>>word;
-cout<<endl<<"enter meaning";
-cin>>meaning;
-cout<<endl<<"pronounce";
-cin>>pron;
-}
-void display()
-{
-cout<<endl<<"********************************";
-cout<<endl<<"word is : "<<word;
-cout<<endl<<"meaning is : "<<meaning;
-cout<<endl<<"pronounced as : "<<pron;
-}
+ private:
+ char meaning[300];
+ char pron[100];
+ public:
+ char word[100];
+ void accept()
+  {
+   cout<<endl<<"enter word";
+   cin>>word;
+   cout<<endl<<"enter meaning";
+   cin>>meaning;
+   cout<<endl<<"pronounce";
+   cin>>pron;
+  }
+ void display()
+ {
+  cout<<endl<<"********************************";
+  cout<<endl<<"word is : "<<word;
+  cout<<endl<<"meaning is : "<<meaning;
+  cout<<endl<<"pronounced as : "<<pron;
+ }
 };
 dictionary obj;
 //class ends here
-void search()
-{
+ void search()
+  {
     fstream rd;
     rd.open("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\diction.txt",ios::in);
     char nm[50];
@@ -40,7 +40,7 @@ void search()
     rd.seekg(0,ios::beg);
     int flag=0;
     for(int i=1;i<=size;i++)
-    {
+     {
         rd.read((char*)&obj,sizeof (obj));
         if(strcmp(nm,obj.word)==0)
         {
@@ -56,32 +56,29 @@ void search()
     {
         obj.display();
     }
-}
-void addrecord()
-{
-
-obj.accept();
-fstream wr;
-wr.open("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\diction.txt",ios::app);
-wr.write((char*)&obj,sizeof(obj));
-cout<<endl<<"object written successfully";
-}
-void viewrecord()
-{
-
+ }
+ void addrecord()
+  {
+  obj.accept();
+  fstream wr;
+  wr.open("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\diction.txt",ios::app);
+  wr.write((char*)&obj,sizeof(obj));
+  cout<<endl<<"object written successfully";
+  }
+  void viewrecord()
+  {
     fstream rd("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\diction.txt",ios::in);
     rd.seekg(0,ios::end);
     int size=rd.tellg()/sizeof (obj);
     rd.seekg(0,ios::beg);
     for(int i=1;i<=size;i++)
     {
-
-        rd.read((char*)&obj,sizeof(obj));
-        obj.display();
+      rd.read((char*)&obj,sizeof(obj));
+      obj.display();
     }
-}
-void removerecord()
-{
+  }
+ void removerecord()
+ {
     fstream rd;
     rd.open("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\diction.txt",ios::in);
     fstream wr("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\temp.txt",ios::out);
@@ -103,15 +100,14 @@ void removerecord()
         {
             wr.write((char*)&obj,sizeof (obj));
         }
-        }
+    }
         rd.close();
         wr.close();
         remove("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\diction.txt");
         rename("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\temp.txt","C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\diction.txt");
-    }
+  }
     void updaterecord()
     {
-
         fstream rd;
         rd.open("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\diction.txt",ios::in);
         fstream wr("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\temp.txt",ios::app);
@@ -124,24 +120,23 @@ void removerecord()
         int flag=0;
         for(int i=1;i<=size;i++)
         {
-
             rd.read((char*)&obj,sizeof (obj));
             if(strcmp(nm,obj.word)==0)
             {
-                obj.accept();
-            wr.write((char*)&obj,sizeof(obj));
+             obj.accept();
+             wr.write((char*)&obj,sizeof(obj));
             }
             else
             {
                 wr.write((char*)&obj,sizeof(obj));
             }
-            }
+        }
             rd.close();
             wr.close();
             remove("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\diction.txt");
             rename("C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\temp.txt","C:\\Users\\officeworks\\Desktop\\project\\ashutosh diction\\diction.txt");
-            }
-main()
+   }
+void main()
 {
     int a;
     cout<<endl<<"enter 1 to add words";
@@ -157,39 +152,36 @@ main()
         {
         addrecord();
         break;
-    }
+        }
     case 2:
         {
-            viewrecord();
+        viewrecord();
         break;
-}
+        }
     case 3:
         {
-
-            search();
-            break;
+        search();
+        break;
         }
     case 4:
         {
-
-            removerecord();
-            break;
+        removerecord();
+        break;
         }
     case 5:
         {
-            updaterecord();
-            break;
+        updaterecord();
+        break;
         }
     case 6:
         {
-
-            cout<<"exit";
-            break;
+        cout<<"exit";
+        break;
         }
-        default:
+     default:
         {
             cout<<"invalid";
         }
-        }
+   }
 }
 
